@@ -1,0 +1,105 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){	
+
+	//$("table>tbody>tr>td:last>select").val("Hyderabad");
+
+	//$('select option:contains("Hyderabad")').prop('selected',true);
+
+	// if($('table>tbody>tr>td:last>select option:selected')){
+	// 	alert("123")
+	// }
+
+	$('#location option[value="Hyderabad"]').attr("selected",true);
+	$('#color option[value="Red"]').attr("selected",true);
+
+	$("table").css("background-color",$("#color").val());
+
+	var ddl = $("#location");
+
+	$(ddl).on("change",function(event){
+		$("table>tfoot>tr>td:last").text($("#location option:selected").text());
+		ddlValidate();
+	});
+	$("#color").on("change", function(event){
+		$("table").css("background-color",$(this).val());
+	});
+	var name = $("table>tbody>tr>td:first").text();
+	var selectedLocation = ddl.val();
+//	var selectedLocation = $("table>tbody>tr>td:last>select option:selected").text();
+	$("table>tfoot>tr>td:first").text(name);
+	$("table>tfoot>tr>td:last").text(selectedLocation);
+
+	// var ddlValidate = function(){
+	// 	if(ddl.val() === "-1"){
+	// 		alert("Please select location");
+	// 	}
+	// }
+
+	// function ddlValidate(){
+	// 	if(ddl.val() === "-1"){
+	// 		alert("Please select location");
+	// 	}
+	// }
+	
+	var ddlValidate = () =>{
+		if(ddl.val() === "-1"){
+			alert("Please select location");
+		}
+	}
+	$("#hiderow").click(function(event){
+		$("table>tfoot").toggle();
+		var toggle = $("table>tfoot").is(':visible');
+		var displaytext = ( toggle==true? "Footer Show":"Footer Hide" );
+		$("table>tbody>tr>td:last>span").text(displaytext);
+	});
+});
+</script>
+</head>
+<body>
+	<div>
+		<table border="1">
+			<thead>
+					<th>Name</th>
+					<th>Location</th>
+					<th>BackColor</th>
+					<th>Hide 2nd Row</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td>SriVani</td>
+					<td> 
+						<select id="location">
+							<option value="-1">--Select Location--</option>
+							<option value="Hyderabad">Hyderabad</option>
+							<option value="Chennai" >Chennai</option>
+							<option value="Banglore" >Banglore</option>
+						</select>
+					</td>
+					<td> 
+						<select id="color">
+							<option value="-1">--Select Color--</option>
+							<option value="Red">Red</option>
+							<option value="Blue" >Blue</option>
+							<option value="Green" >Green</option>
+						</select>
+					</td>
+					<td>
+						<input type="checkbox" id="hiderow" name="hiderow" checked>
+						<span id="displaytxt">Footer Show</span>
+					</td>
+				</tr>
+			</tbody>	
+			<tfoot>
+				<tr>
+				  <td></td>
+				  <td colspan=2 ></td>
+				  <td></td>
+				</tr>
+			  </tfoot>	
+		</table>
+	</div>
+</body>
+</html>

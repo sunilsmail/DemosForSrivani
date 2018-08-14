@@ -1,0 +1,38 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$("button").on("click", function(){
+		var blnIschecked = true;
+		var displaycolor = "";
+		var checkbox = $('input[type="checkbox"]');
+		 $.each(checkbox, function(key, value){
+			if($(value).is(":checked")){			
+				blnIschecked=false;
+				displaycolor = displaycolor + $(value).val() +", ";
+			}		 
+		 });
+		 
+		 if(blnIschecked){
+			alert("Please select atleast one color");
+		 }		 
+		 $("#txtdisplay").val(displaycolor);	
+	});
+
+});
+</script>
+</head>
+<body>
+<div>
+	<span><input type="checkbox" value="red" /> Red<span>
+	<span><input type="checkbox" value="Green" /> Green<span>
+</div>
+<button> Display </button>
+
+<br>
+<input type="text" id="txtdisplay" >
+
+</body>
+</html>
